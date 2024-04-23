@@ -32,23 +32,18 @@ jobs:
     - name: Lint code
       run: npm run lint
 
-  api_test:
-      runs-on: ubuntu-latest
-
-      steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'  # Choose the node version suitable for your project
-
-      - name: Install Newman
-        run: npm install -g newman
-
-      - name: Run Postman tests
-        run: newman run "https://lunar-robot-633258.postman.co/workspace/Home~3afcb2c2-8823-4f7b-989f-452e71a29625/collection/14357354-b88d62cb-19ad-4c7f-aec3-696373bca0fa?action=share&creator=14357354"
+  automated-api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+      - name: Run API tests
+        run: |
+          postman collection run "14357354-b88d62cb-19ad-4c7f-aec3-696373bca0fa"
 
   SonarCloud_analysis:
     runs-on: ubuntu-latest
