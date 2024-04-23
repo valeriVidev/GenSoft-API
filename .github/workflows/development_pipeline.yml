@@ -21,7 +21,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: Frontend/package-lock.json
+        cache-dependency-path: package-lock.json
 
     - name: Install dependencies
       run: npm install
@@ -48,7 +48,7 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman tests
-        run: newman run "https://api.postman.com/collections/${{ secrets.POSTMAN_COLLECTION }}?access_key=${{ secrets.POSTMAN_API_KEY }}"
+        run: newman run "https://api.postman.com/collections/14357354-b88d62cb-19ad-4c7f-aec3-696373bca0fa?access_key=PMAT-01HW4YKKPZQZC2KXD11JJNGSTN"
 
   SonarCloud_analysis:
     runs-on: ubuntu-latest
