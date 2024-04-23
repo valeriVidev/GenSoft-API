@@ -31,4 +31,4 @@ app.use('/api/user', require('./controllers/userRoutes'))
 
 app.use(customErrors)
 
-app.listen(port, () => console.log(`App listening on port ${port}!`));
+module.exports = app;
