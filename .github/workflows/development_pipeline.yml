@@ -47,13 +47,8 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Run Postman tests
-        run: |
-          node app.js
-          newman run "https://api.postman.com/collections/14357354-b88d62cb-19ad-4c7f-aec3-696373bca0fa?access_key=PMAT-01HW4YKKPZQZC2KXD11JJNGSTN"
+        run: newman run "https://api.postman.com/collections/14357354-b88d62cb-19ad-4c7f-aec3-696373bca0fa?access_key=PMAT-01HW4YKKPZQZC2KXD11JJNGSTN"
 
   SonarCloud_analysis:
     runs-on: ubuntu-latest
