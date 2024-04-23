@@ -40,6 +40,9 @@ jobs:
         run: npm install
       - name: Start the server
         run: node app.js &
+        shell: bash
+      - name: Wait for server to be ready
+        run: sleep 10
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
