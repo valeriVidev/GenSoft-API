@@ -43,9 +43,6 @@ jobs:
           sleep 2
         done
 
-    - name: Run migrations (if applicable)
-      run: npm run migrate  # Replace with your actual command to run migrations
-
     - name: Run tests
       env:
         MYSQL_HOST: 127.0.0.1
