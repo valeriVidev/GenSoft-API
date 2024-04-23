@@ -48,7 +48,7 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman tests
-        run: newman run "https://api.postman.com/collections/14357354-b88d62cb-19ad-4c7f-aec3-696373bca0fa?access_key=PMAT-01HW4YKKPZQZC2KXD11JJNGSTN"
+        run: newman run "https://lunar-robot-633258.postman.co/workspace/Home~3afcb2c2-8823-4f7b-989f-452e71a29625/collection/14357354-b88d62cb-19ad-4c7f-aec3-696373bca0fa?action=share&creator=14357354"
 
   SonarCloud_analysis:
     runs-on: ubuntu-latest
