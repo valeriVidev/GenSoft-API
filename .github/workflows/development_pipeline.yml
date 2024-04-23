@@ -37,9 +37,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
-          run: npm install
+        run: npm install
       - name: Start the server
-          run: node app.js &
+        run: node app.js &
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
