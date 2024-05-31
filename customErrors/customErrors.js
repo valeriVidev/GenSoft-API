@@ -19,6 +19,19 @@ class QueryError extends Error {
     }
 }
 
+class ArticleExistsError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "ArticleExistsError";
+    }
+}
+
+class PropertyExistsError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "PropertyExistsError";
+    }
+}
 
 class MissingUserError extends Error {
     constructor(message) {
@@ -38,6 +51,8 @@ module.exports = {
     MissingParamError,
     IncorrectParamError,
     QueryError,
+    ArticleExistsError,
+    PropertyExistsError,
     MissingUserError,
     UserExistsError
 }

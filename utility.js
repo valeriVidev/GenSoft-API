@@ -59,9 +59,32 @@ async function executeRequest(func, req, source) {
   return { result: response };
 }
 
+// Removes images that got stored from a request that failed midway 
+async function removeImages(headImg, support_imgs) {
+  const fs = require('fs')
+  imgPaths = []
+  if (support_imgs != null) {
+    support_imgs.forEach(path => {
+      if (path["image_path"] === undefined) {
+        fs.unlinkSync(path);
+        imgPaths.push(path)
+      }
+      else {
+        fs.unlinkSync(path["image_path"]);
+        imgPaths.push(path["image_path"])
+      }
+    });
+  }
+  if (headImg != null) {
+    fs.unlinkSync(headImg);
+  }
+  return imgPaths
+}
+
 module.exports = {
   currentDate,
   logEntry,
   executeRequest,
-  mysqlPool
+  mysqlPool,
+  removeImages
 };

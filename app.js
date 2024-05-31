@@ -25,6 +25,9 @@ app.use(function (req, res, next) {
 
 app.use('/api/auth', require('./controllers/authRoutes'))
 
+app.use('/api/property', require('./controllers/propertyRoutes'))
+app.use('/api/dynamicParams', require('./controllers/dynamicParamRoutes'))
+
 app.use(verifyJWT)
 
 app.use('/api/user', require('./controllers/userRoutes'))
@@ -32,3 +35,33 @@ app.use('/api/user', require('./controllers/userRoutes'))
 app.use(customErrors)
 
 module.exports = app;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const business_regex = new RegExp(
+//   "https://capitalplusbrokers.com/business/[^/]+/$"
+// );
