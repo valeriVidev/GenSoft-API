@@ -73,7 +73,7 @@ async function deleteAllImages(source, item_id) {
             throw new customErrs.QueryError(`Failed in deleting images for id: ${item_id} with source: "${source}".`)
         }
     }
-    else if(response !== undefined){
+    else if(response == undefined){
         throw new customErrs.QueryError(`Failed in deleting images for id: ${item_id} with source: "${source}".`)
     }
 

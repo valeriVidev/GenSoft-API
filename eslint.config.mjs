@@ -21,6 +21,7 @@ export default [
       "no-undef": "off",
       "no-unused-vars": "off",
       "no-prototype-builtins": "off",
+      "no-redeclare": "off"
     },
     languageOptions: {
       sourceType: "module",
