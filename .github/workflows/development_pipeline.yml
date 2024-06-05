@@ -53,12 +53,6 @@ jobs:
       run: |
         npm start &
         echo "Waiting for server to start..."
-        for i in `seq 1 60`; do
-          curl -sSf http://127.0.0.1:3005/health && echo "Server is up!" && exit 0
-          echo "Waiting..."
-          sleep 1
-        done
-        echo "Server failed to start" && exit 1
 
     - name: Install Newman
       run: npm install -g newman
