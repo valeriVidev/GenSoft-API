@@ -1,0 +1,1015 @@
+{
+	"info": {
+		"_postman_id": "b88d62cb-19ad-4c7f-aec3-696373bca0fa",
+		"name": "GenSoft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14357354",
+		"_collection_link": "https://lunar-robot-633258.postman.co/workspace/Home~3afcb2c2-8823-4f7b-989f-452e71a29625/collection/14357354-b88d62cb-19ad-4c7f-aec3-696373bca0fa?action=share&source=collection_link&creator=14357354"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"var result = response[\"result\"];\r",
+									"var access_token = result[\"access_token\"];\r",
+									"pm.collectionVariables.set(\"access_token\", access_token);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"TestUser1\",\r\n    \"password\":\"TestPassword1.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/auth/login",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/api/auth/logout",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User requests",
+			"item": [
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"]).to.eql(\"User created.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"TestUser2\",\r\n    \"password\":\"TestPassword2.\",\r\n    \"password_repeat\":\"TestPassword2.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/user/create",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"][0][\"username\"]).to.eql(\"TestUser2\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"TestUser2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/user/get",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"]).to.eql(\"User updated.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"TestUser2\",\r\n    \"new_password\":\"TestPassword2.New\",\r\n    \"password_repeat\":\"TestPassword2.New\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/user/update",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"]).to.eql(\"User deleted successfully.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"TestUser2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/user/delete",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Property requests",
+			"item": [
+				{
+					"name": "Create a property",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"var result = response[\"result\"];\r",
+									"var property_id = result[\"id\"];\r",
+									"pm.collectionVariables.set(\"property_id\", property_id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"][\"property_title\"]).to.eql(\"Test title\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "head_image",
+									"type": "file",
+									"src": "/C:/Users/Valeri/Desktop/GenSoft folder/GenSoft-API/test_images/property photo.jpg",
+									"disabled": true
+								},
+								{
+									"key": "support_images",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "property_title",
+									"value": "Test title",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_body",
+									"value": "Test title testing the test title",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_country",
+									"value": "Bulgaria",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_city",
+									"value": "Sofia",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_type",
+									"value": "Apartment",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_language",
+									"value": "en",
+									"contentType": "application/json",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_base}}/api/property/create",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"property",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a property",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"][\"property_title\"]).to.eql(\"Test title\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"property_title\": \"Test title\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/property/get",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"property",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get full property / Admin functionality",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"property_title\": \"Test title\",\r\n    \"property_link\": null\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/property/getFull",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"property",
+								"getFull"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get property names / Admin functionality",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"property_language\": \"en\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/property/getNames",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"property",
+								"getNames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a property",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"][\"property_title\"]).to.eql(\"Updated test title\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "head_image",
+									"type": "file",
+									"src": "/C:/Users/Valeri/Desktop/capital-plus-project/API/test_images/update_head_img.png"
+								},
+								{
+									"key": "support_images",
+									"type": "file",
+									"src": "/C:/Users/Valeri/Desktop/capital-plus-project/API/test_images/support_imaage1.png"
+								},
+								{
+									"key": "property_title",
+									"value": "Test title",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_title_new",
+									"value": "Updated test title",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_body",
+									"value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_country",
+									"value": "Bulgaria",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_city",
+									"value": "Burgas",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_type",
+									"value": "Studio",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "property_language",
+									"value": "bg",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_base}}/api/property/update",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"property",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search for properties",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"][0][\"property_title\"]).to.eql(\"Updated test title\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"property_title\": \"Updated test title\",\r\n    \"property_country\": \"Bulgaria\",\r\n    \"property_city\": \"Burgas\",\r\n    \"property_type\": \"Studio\",\r\n    \"property_language\": \"bg\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/property/search",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"property",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get paged properties",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"offset\": 0,\r\n    \"property_language\": \"bg\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/property/getPage",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"property",
+								"getPage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a property",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"]).to.eql(\"Property deleted successfully.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"property_id\": {{property_id}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/property/delete",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"property",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dynamic parameter requests",
+			"item": [
+				{
+					"name": "Create dynamic param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"]).to.eql(\"Entry added successfully.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyMSIsImlhdCI6MTY3NzA3NTAzNSwiZXhwIjoxNjc3MTYxNDM1fQ.rXxJY1wZTxJcIgHltABTDENcqx-SjYRaoQjdrzuO5Y0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"param_value\": \"Test\",\r\n    \"type\": \"Country\",\r\n    \"source\": \"Test\",\r\n    \"param_language\": \"en\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/dynamicParams/create",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"dynamicParams",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get needed params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"Country\",\r\n    \"source\": \"Test\",\r\n    \"param_language\": \"en\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/dynamicParams/get",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"dynamicParams",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response[\"result\"]).to.eql(\"Entry deleted successfully.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"param_value\": \"Test\",\r\n    \"type\": \"Country\",\r\n    \"source\": \"Test\",\r\n    \"param_language\": \"en\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/api/dynamicParams/delete",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"dynamicParams",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_base",
+			"value": "http://127.0.0.1:3005"
+		},
+		{
+			"key": "access_token",
+			"value": "holder"
+		},
+		{
+			"key": "article_id",
+			"value": ""
+		},
+		{
+			"key": "property_id",
+			"value": ""
+		}
+	]
+}

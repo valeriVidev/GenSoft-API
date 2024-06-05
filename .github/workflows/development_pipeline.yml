@@ -13,10 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '18'
         cache: 'npm'
         cache-dependency-path: package-lock.json
 
@@ -28,6 +28,44 @@ jobs:
 
     - name: Lint code
       run: npm run lint
+
+  integration-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: package-lock.json
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Start Express.js server
+      run: node server.js &
+      env:
+        NODE_ENV: test
+
+    - name: Wait for server to be ready
+      run: |
+        echo "Waiting for server to start..."
+        sleep 10  # Adjust the sleep time if needed to ensure the server is ready
+
+    - name: Install Newman
+      run: npm install -g newman
+
+    - name: Run Postman integration tests
+      run: newman run Postman/GenSoft.postman_collection.json
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: postman-test-results
+        path: newman/  # Newman will output test results to the newman/ directory
 
   SonarCloud_analysis:
     runs-on: ubuntu-latest
