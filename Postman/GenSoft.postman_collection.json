@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "b88d62cb-19ad-4c7f-aec3-696373bca0fa",
 		"name": "GenSoft",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "14357354",
 		"_collection_link": "https://lunar-robot-633258.postman.co/workspace/Home~3afcb2c2-8823-4f7b-989f-452e71a29625/collection/14357354-b88d62cb-19ad-4c7f-aec3-696373bca0fa?action=share&source=collection_link&creator=14357354"
 	},
@@ -42,17 +42,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/auth/login",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"auth",
-								"login"
-							]
-						}
+						"url": "{{url_base}}/api/auth/login"
 					},
 					"response": []
 				},
@@ -74,17 +64,7 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "{{url_base}}/api/auth/logout",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"auth",
-								"logout"
-							]
-						}
+						"url": "{{url_base}}/api/auth/logout"
 					},
 					"response": []
 				}
@@ -116,13 +96,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -135,17 +111,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/user/create",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"create"
-							]
-						}
+						"url": "{{url_base}}/api/user/create"
 					},
 					"response": []
 				},
@@ -172,13 +138,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -191,17 +153,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/user/get",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"get"
-							]
-						}
+						"url": "{{url_base}}/api/user/get"
 					},
 					"response": []
 				},
@@ -228,13 +180,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "PUT",
 						"header": [],
@@ -247,17 +195,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/user/update",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"update"
-							]
-						}
+						"url": "{{url_base}}/api/user/update"
 					},
 					"response": []
 				},
@@ -284,13 +222,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "DELETE",
 						"header": [],
@@ -303,17 +237,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/user/delete",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"delete"
-							]
-						}
+						"url": "{{url_base}}/api/user/delete"
 					},
 					"response": []
 				}
@@ -351,27 +275,22 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "multipart/form-data",
-								"type": "text"
+								"value": "multipart/form-data"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "head_image",
+									"key": "file",
 									"type": "file",
 									"src": "/C:/Users/Valeri/Desktop/GenSoft folder/GenSoft-API/test_images/property photo.jpg",
 									"disabled": true
@@ -420,17 +339,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "{{url_base}}/api/property/create",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"property",
-								"create"
-							]
-						}
+						"url": "{{url_base}}/api/property/create"
 					},
 					"response": []
 				},
@@ -466,17 +375,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/property/get",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"property",
-								"get"
-							]
-						}
+						"url": "{{url_base}}/api/property/get"
 					},
 					"response": []
 				},
@@ -485,13 +384,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -504,17 +399,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/property/getFull",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"property",
-								"getFull"
-							]
-						}
+						"url": "{{url_base}}/api/property/getFull"
 					},
 					"response": []
 				},
@@ -523,13 +408,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -542,17 +423,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/property/getNames",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"property",
-								"getNames"
-							]
-						}
+						"url": "{{url_base}}/api/property/getNames"
 					},
 					"response": []
 				},
@@ -580,13 +451,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "PUT",
 						"header": [],
@@ -596,12 +463,14 @@
 								{
 									"key": "head_image",
 									"type": "file",
-									"src": "/C:/Users/Valeri/Desktop/capital-plus-project/API/test_images/update_head_img.png"
+									"src": "/C:/Users/Valeri/Desktop/GenSoft folder/GenSoft-API/test_images/update_image_support.png",
+									"disabled": true
 								},
 								{
 									"key": "support_images",
 									"type": "file",
-									"src": "/C:/Users/Valeri/Desktop/capital-plus-project/API/test_images/support_imaage1.png"
+									"src": [],
+									"disabled": true
 								},
 								{
 									"key": "property_title",
@@ -646,17 +515,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "{{url_base}}/api/property/update",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"property",
-								"update"
-							]
-						}
+						"url": "{{url_base}}/api/property/update"
 					},
 					"response": []
 				},
@@ -693,17 +552,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/property/search",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"property",
-								"search"
-							]
-						}
+						"url": "{{url_base}}/api/property/search"
 					},
 					"response": []
 				},
@@ -735,17 +584,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/property/getPage",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"property",
-								"getPage"
-							]
-						}
+						"url": "{{url_base}}/api/property/getPage"
 					},
 					"response": []
 				},
@@ -772,13 +611,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "DELETE",
 						"header": [],
@@ -791,17 +626,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/property/delete",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"property",
-								"delete"
-							]
-						}
+						"url": "{{url_base}}/api/property/delete"
 					},
 					"response": []
 				}
@@ -833,13 +658,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "POST",
 						"header": [
@@ -859,17 +680,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/dynamicParams/create",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"dynamicParams",
-								"create"
-							]
-						}
+						"url": "{{url_base}}/api/dynamicParams/create"
 					},
 					"response": []
 				},
@@ -901,17 +712,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/dynamicParams/get",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"dynamicParams",
-								"get"
-							]
-						}
+						"url": "{{url_base}}/api/dynamicParams/get"
 					},
 					"response": []
 				},
@@ -938,13 +739,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{access_token}}"
+							}
 						},
 						"method": "DELETE",
 						"header": [],
@@ -957,17 +754,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{url_base}}/api/dynamicParams/delete",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"api",
-								"dynamicParams",
-								"delete"
-							]
-						}
+						"url": "{{url_base}}/api/dynamicParams/delete"
 					},
 					"response": []
 				}
