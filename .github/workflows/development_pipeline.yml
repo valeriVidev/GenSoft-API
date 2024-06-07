@@ -50,7 +50,9 @@ jobs:
 
       - name: Start the server
         run: |
-          node server.js &
+          node server.js &  
+          sleep 5          
+        timeout-minutes: 1
       
       - name: Run API tests
         run: |
