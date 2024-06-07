@@ -38,6 +38,20 @@ jobs:
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+      
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start the server
+        run: |
+          node server.js &
+      
       - name: Run API tests
         run: |
           postman collection run "${{ secrets.POSTMAN_COLLECTION }}"
