@@ -38,32 +38,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
-        cache: 'npm'
-        cache-dependency-path: package-lock.json
-
-    - name: Install dependencies
-      run: npm install
 
     - name: Install Newman
       run: npm install -g newman
 
-    - name: Start Express.js server
-      run: node server.js &
-      env:
-        NODE_ENV: test
-
-    - name: Wait for server to be ready
-      run: |
-        echo "Waiting for server to start..."
-        for i in `seq 1 60`; do
-          nc -zv 127.0.0.1 3005 && echo "Server is up!" && exit 0
-          echo "Waiting for server to start on port 3005..."
-          sleep 1
-        done
-        echo "Server failed to start" && exit 1
-
     - name: Run Postman integration tests
-      run: newman run Postman/GenSoft.postman_collection.json
+      run: newman run https://api.getpostman.com/collections/${{ secrets.POSTMAN_COLLECTION }}?apikey=${{ secrets.POSTMAN_API_KEY }}
 
     - name: Upload test results
       if: always()
