@@ -18,8 +18,8 @@ const storage = multer.diskStorage({
 
     let new_file_name = Date.now() + "_" + count + path.extname(file.originalname);
     const full_path = __filename;
-    const dirPath = full_path.split('middleware')[0];
-    let dest_folder = "uploads\\"
+    const dirPath = "http://localhost:8000/"//full_path.split('middleware')[0];
+    let dest_folder = "uploads/"
     const imgPath = dirPath + dest_folder + new_file_name;
     if (file.fieldname === "head_image") {
       new_file_name = "head_" + new_file_name;
