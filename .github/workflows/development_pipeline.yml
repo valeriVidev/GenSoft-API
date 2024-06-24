@@ -38,24 +38,6 @@ jobs:
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
-
-      # - name: Download Ngrok
-      #   run: wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && unzip ngrok-stable-linux-amd64.zip
-
-      # - name: Start Ngrok tunnel
-      #   run: ./ngrok http 3005 &
-
-      # - name: Wait for Ngrok to start
-      #   run: sleep 5
-
-      # - name: Get Ngrok URL
-      #   run: curl http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url' > ngrok_url.txt
-
-      # - name: Set Ngrok URL as environment variable
-      #   run: echo "NGROK_URL=$(cat ngrok_url.txt)" >> $GITHUB_ENV
-
-      # - name: Run Postman Tests
-      #   run: newman run your-collection.json -e your-environment.json --env-var "url_base=$NGROK_URL"
       
       - name: Run API tests
         run: |
